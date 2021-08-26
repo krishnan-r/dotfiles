@@ -1,2 +1,9 @@
+[shell]
+disabled=false
+
 [kubernetes]
 disabled=false
+
+[env_var.OS_PROJECT_NAME]
+variable="OS_PROJECT_NAME"
+style="green"
