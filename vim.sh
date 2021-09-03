@@ -2,6 +2,10 @@
 
 set -euxo pipefail
 
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )"; pwd;)"
+
+ln -s "${script_dir}/vimrc" "${HOME}/.vimrc"
+
 vim_packdir="${HOME}/.vim/pack/dotfiles/start/"
 rm -rf "${vim_packdir}"
 mkdir -p "${vim_packdir}"
