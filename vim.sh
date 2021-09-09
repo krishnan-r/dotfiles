@@ -1,18 +1,43 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )"; pwd;)"
 
+echo "Symlinking ${HOME}/.vimrc"
 ln -sf "${script_dir}/vimrc" "${HOME}/.vimrc"
 
-vim_packdir="${HOME}/.vim/pack/dotfiles/start/"
-rm -rf "${vim_packdir}"
-mkdir -p "${vim_packdir}"
 
-( \
-cd "${vim_packdir}" && \
-git clone --depth=1 https://github.com/preservim/nerdtree.git && \
-git clone --depth=1 https://github.com/vim-airline/vim-airline && \
-git clone --depth=1 https://github.com/edkolev/tmuxline.vim \
+
+plugins=(
+"https://github.com/preservim/nerdtree.git"
+"https://github.com/vim-airline/vim-airline"
+"https://github.com/edkolev/tmuxline.vim"
+"https://github.com/vim-airline/vim-airline-themes.git"
+"https://github.com/ryanoasis/vim-devicons"
+"https://github.com/tiagofumo/vim-nerdtree-syntax-highlight"
 )
+
+install_plugins() {
+  vim_packdir="${HOME}/.vim/pack/dotfiles/start/"
+  mkdir -p "${vim_packdir}"
+  pushd "${vim_packdir}";
+
+  # Pull repositories already cloned
+  for f in *; do
+    if [ -d "$f" ]; then
+	pushd "${f}";
+        echo "Pulling from $f" &
+	git pull || true &
+	popd;
+    fi
+  done
+  # Clone any new repositories
+  for plugin in "${plugins[@]}"; do
+    git clone -- "${plugin}" || echo "Skipping ${plugin}" &
+  done
+  wait
+  popd;
+}
+
+install_plugins
