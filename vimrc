@@ -3,6 +3,7 @@ set mouse=a
 set number
 set relativenumber
 syntax on
+colorscheme codedark
 "Hide intro
 set shortmess=I
 
@@ -18,6 +19,7 @@ highlight EndOfBuffer ctermfg=black
 nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeToggle<CR>
 let NERDTreeWinPos=1
 let NERDTreeMinimalUI=1
+let NERDTreeShowHidden=1
 
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
@@ -43,14 +45,15 @@ augroup nerdtreehidecwd
 augroup end
 
 set fillchars+=vert:\│
-hi VertSplit cterm=NONE ctermfg=darkgrey ctermbg=NONE
-hi StatusLine ctermfg=235
-hi StatusLineNC ctermfg=235
+highlight VertSplit cterm=NONE ctermfg=darkgrey ctermbg=NONE
+highlight StatusLine ctermfg=235
+highlight StatusLineNC ctermfg=235
+
+set cursorline
+highlight CursorLine term=bold cterm=NONE ctermbg=NONE  ctermfg=NONE gui=bold
+highlight CursorLineNr term=bold cterm=NONE ctermbg=NONE ctermfg=yellow gui=bold
 
 let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 
-set cursorline
-highlight CursorLine term=bold cterm=NONE ctermbg=none  ctermfg=none gui=bold
-highlight CursorLineNr term=bold cterm=none ctermbg=none ctermfg=yellow gui=bold

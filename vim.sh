@@ -16,6 +16,7 @@ plugins=(
 "https://github.com/vim-airline/vim-airline-themes.git"
 "https://github.com/ryanoasis/vim-devicons"
 "https://github.com/tiagofumo/vim-nerdtree-syntax-highlight"
+"https://github.com/tomasiser/vim-code-dark"
 )
 
 install_plugins() {
@@ -38,6 +39,7 @@ install_plugins() {
   done
   wait
   popd;
+  vim -c 'helptags ALL' -c 'q'
 }
 
 install_plugins
