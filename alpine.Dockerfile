@@ -1,19 +1,25 @@
 FROM alpine:3
 
-RUN apk add --no-cache zsh bash curl vim git
-RUN sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --verbose --yes
+RUN apk add --no-cache \
+            bash \
+            curl \
+            vim \
+            git \
+            direnv \
+            starship
 
-# Create a test user with zsh as default shell
-RUN adduser -D test -s /bin/zsh
+# Create a test user with bash as default shell
+RUN adduser -D test -s /bin/bash
 USER test
 WORKDIR /home/test
 
 COPY ./ ./dotfiles/
 RUN ls && ls $HOME/dotfiles/
+
 # Configure VIM
 RUN $HOME/dotfiles/vim.sh
 
 # Configure zsh shell
-RUN echo 'source "$HOME/dotfiles/init.zsh"' >> ~/.zshrc
+RUN echo 'source "$HOME/dotfiles/bashrc"' >> ~/.bashrc
 
-CMD ["zsh"]
+CMD ["bash"]
