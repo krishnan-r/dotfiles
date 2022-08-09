@@ -15,5 +15,6 @@ fi
 
 # Aliases
 alias la='ls -al'
+# shellcheck source=/dev/null
 source "${script_dir}/aliases-kubernetes.sh"
 
