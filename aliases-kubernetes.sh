@@ -4,7 +4,7 @@
 if hash kubectl 2>/dev/null;  then
     alias k='kubectl'
     alias kgp='kubectl get pods -o wide'
-    alias kgp='kubectl get nodes -o wide'
+    alias kgn='kubectl get nodes -o wide'
 
     # shellcheck source=/dev/null
     source <(kubectl completion bash)
