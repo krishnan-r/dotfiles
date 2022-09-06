@@ -18,3 +18,7 @@ alias la='ls -al'
 # shellcheck source=/dev/null
 source "${script_dir}/aliases-kubernetes.sh"
 
+# Clear tmux history as well
+if [[ $TMUX ]]; then
+  alias clear='clear && tmux clear-history'
+fi
